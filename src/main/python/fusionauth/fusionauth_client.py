@@ -304,6 +304,20 @@ class FusionAuthClient:
             .post() \
             .go()
 
+    def create_messenger(self, request, messenger_id=None):
+        """
+        Creates a messenger.  You can optionally specify an Id for the messenger, if not provided one will be generated.
+
+        Attributes:
+            messenger_id: (Optional) The Id for the messenger. If not provided a secure random UUID will be generated.
+            request: The request object that contains all of the information used to create the messenger.
+        """
+        return self.start().uri('/api/messenger') \
+            .url_segment(messenger_id) \
+            .body_handler(JSONBodyHandler(request)) \
+            .post() \
+            .go()
+
     def create_tenant(self, request, tenant_id=None):
         """
         Creates a tenant. You can optionally specify an Id for the tenant, if not provided one will be generated.
@@ -618,6 +632,18 @@ class FusionAuthClient:
         """
         return self.start().uri('/api/lambda') \
             .url_segment(lambda_id) \
+            .delete() \
+            .go()
+
+    def delete_messenger(self, messenger_id):
+        """
+        Deletes the messenger for the given Id.
+
+        Attributes:
+            messenger_id: The Id of the messenger to delete.
+        """
+        return self.start().uri('/api/messenger') \
+            .url_segment(messenger_id) \
             .delete() \
             .go()
 
@@ -1286,6 +1312,20 @@ class FusionAuthClient:
         """
         return self.start().uri('/api/lambda') \
             .url_segment(lambda_id) \
+            .body_handler(JSONBodyHandler(request)) \
+            .patch() \
+            .go()
+
+    def patch_messenger(self, messenger_id, request):
+        """
+        Updates, via PATCH, the messenger with the given Id.
+
+        Attributes:
+            messenger_id: The Id of the messenger to update.
+            request: The request that contains just the new messenger information.
+        """
+        return self.start().uri('/api/messenger') \
+            .url_segment(messenger_id) \
             .body_handler(JSONBodyHandler(request)) \
             .patch() \
             .go()
@@ -2004,6 +2044,28 @@ class FusionAuthClient:
             .url_parameter('applicationId', application_id) \
             .url_parameter('start', start) \
             .url_parameter('end', end) \
+            .get() \
+            .go()
+
+    def retrieve_messenger(self, messenger_id):
+        """
+        Retrieves the messenger with the given Id.
+
+        Attributes:
+            messenger_id: The Id of the messenger.
+        """
+        return self.start().uri('/api/messenger') \
+            .url_segment(messenger_id) \
+            .get() \
+            .go()
+
+    def retrieve_messenger(self):
+        """
+        Retrieves all of the messenger.
+
+        Attributes:
+        """
+        return self.start().uri('/api/messenger') \
             .get() \
             .go()
 
@@ -2847,6 +2909,20 @@ class FusionAuthClient:
         """
         return self.start().uri('/api/lambda') \
             .url_segment(lambda_id) \
+            .body_handler(JSONBodyHandler(request)) \
+            .put() \
+            .go()
+
+    def update_messenger(self, messenger_id, request):
+        """
+        Updates the messenger with the given Id.
+
+        Attributes:
+            messenger_id: The Id of the messenger to update.
+            request: The request object that contains all of the new messenger information.
+        """
+        return self.start().uri('/api/messenger') \
+            .url_segment(messenger_id) \
             .body_handler(JSONBodyHandler(request)) \
             .put() \
             .go()
