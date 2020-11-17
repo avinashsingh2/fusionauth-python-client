@@ -304,6 +304,20 @@ class FusionAuthClient:
             .post() \
             .go()
 
+    def create_message_template(self, request, message_template_id=None):
+        """
+        Creates an message template. You can optionally specify an Id for the template, if not provided one will be generated.
+
+        Attributes:
+            message_template_id: (Optional) The Id for the template. If not provided a secure random UUID will be generated.
+            request: The request object that contains all of the information used to create the message template.
+        """
+        return self.start().uri('/api/message/template') \
+            .url_segment(message_template_id) \
+            .body_handler(JSONBodyHandler(request)) \
+            .post() \
+            .go()
+
     def create_tenant(self, request, tenant_id=None):
         """
         Creates a tenant. You can optionally specify an Id for the tenant, if not provided one will be generated.
@@ -618,6 +632,18 @@ class FusionAuthClient:
         """
         return self.start().uri('/api/lambda') \
             .url_segment(lambda_id) \
+            .delete() \
+            .go()
+
+    def delete_message_template(self, message_template_id):
+        """
+        Deletes the message template for the given Id.
+
+        Attributes:
+            message_template_id: The Id of the message template to delete.
+        """
+        return self.start().uri('/api/message/template') \
+            .url_segment(message_template_id) \
             .delete() \
             .go()
 
@@ -1286,6 +1312,20 @@ class FusionAuthClient:
         """
         return self.start().uri('/api/lambda') \
             .url_segment(lambda_id) \
+            .body_handler(JSONBodyHandler(request)) \
+            .patch() \
+            .go()
+
+    def patch_message_template(self, message_template_id, request):
+        """
+        Updates, via PATCH, the message template with the given Id.
+
+        Attributes:
+            message_template_id: The Id of the message template to update.
+            request: The request that contains just the new message template information.
+        """
+        return self.start().uri('/api/message/template') \
+            .url_segment(message_template_id) \
             .body_handler(JSONBodyHandler(request)) \
             .patch() \
             .go()
@@ -2004,6 +2044,28 @@ class FusionAuthClient:
             .url_parameter('applicationId', application_id) \
             .url_parameter('start', start) \
             .url_parameter('end', end) \
+            .get() \
+            .go()
+
+    def retrieve_message_template(self, message_template_id=None):
+        """
+        Retrieves the message template for the given Id. If you don't specify the id, this will return all of the message templates.
+
+        Attributes:
+            message_template_id: (Optional) The Id of the message template.
+        """
+        return self.start().uri('/api/message/template') \
+            .url_segment(message_template_id) \
+            .get() \
+            .go()
+
+    def retrieve_message_templates(self):
+        """
+        Retrieves all of the message templates.
+
+        Attributes:
+        """
+        return self.start().uri('/api/message/template') \
             .get() \
             .go()
 
@@ -2847,6 +2909,20 @@ class FusionAuthClient:
         """
         return self.start().uri('/api/lambda') \
             .url_segment(lambda_id) \
+            .body_handler(JSONBodyHandler(request)) \
+            .put() \
+            .go()
+
+    def update_message_template(self, message_template_id, request):
+        """
+        Updates the message template with the given Id.
+
+        Attributes:
+            message_template_id: The Id of the message template to update.
+            request: The request that contains all of the new message template information.
+        """
+        return self.start().uri('/api/message/template') \
+            .url_segment(message_template_id) \
             .body_handler(JSONBodyHandler(request)) \
             .put() \
             .go()
