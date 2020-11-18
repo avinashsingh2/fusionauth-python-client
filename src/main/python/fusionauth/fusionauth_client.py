@@ -2059,9 +2059,9 @@ class FusionAuthClient:
             .get() \
             .go()
 
-    def retrieve_messenger(self):
+    def retrieve_messengers(self):
         """
-        Retrieves all of the messenger.
+        Retrieves all of the messengers.
 
         Attributes:
         """
