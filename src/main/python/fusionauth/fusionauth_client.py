@@ -2059,6 +2059,18 @@ class FusionAuthClient:
             .get() \
             .go()
 
+    def retrieve_message_template_preview(self, request):
+        """
+        Creates a preview of the message template provided in the request, normalized to a given locale.
+
+        Attributes:
+            request: The request that contains the email template and optionally a locale to render it in.
+        """
+        return self.start().uri('/api/message/template/preview') \
+            .body_handler(JSONBodyHandler(request)) \
+            .post() \
+            .go()
+
     def retrieve_message_templates(self):
         """
         Retrieves all of the message templates.
