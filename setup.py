@@ -7,7 +7,7 @@ setup(
     name="fusionauth-client",
     version="1.23.0",
     author="Tyler Scott",
-    author_email="tyler@inversoft.com",
+    author_email="dev@fusionauth.io",
     description="A client library for FusionAuth",
     long_description=long_description,
     long_description_content_type="text/markdown",
